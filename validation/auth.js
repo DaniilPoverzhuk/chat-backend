@@ -5,16 +5,12 @@ exports.login = () => [
     .exists()
     .withMessage("Required field")
     .isEmail()
-    .withMessage("this field should be email")
-    .isLength({ min: 3, max: 30 })
-    .withMessage("Email length should be in the range of 3 - 30 characters"),
+    .withMessage("this field should be email"),
   body("password")
     .exists()
     .withMessage("Required field")
     .isString()
-    .withMessage("Invalid data type, there must be a string")
-    .isLength({ min: 3, max: 20 })
-    .withMessage("Password length should be in the range of 3 - 20 characters"),
+    .withMessage("Invalid data type, there must be a string"),
 ];
 
 exports.registration = () => [
@@ -47,7 +43,5 @@ exports.logout = () => [
     .exists()
     .withMessage("Required field")
     .isEmail()
-    .withMessage("this field should be email")
-    .isLength({ min: 3, max: 30 })
-    .withMessage("Email length should be in the range of 3 - 30 characters"),
+    .withMessage("this field should be email"),
 ];

@@ -30,7 +30,7 @@ class AuthController {
         throw new ApiError().BadRequest("При аутентификации произошла ошибка");
       }
 
-      CookieService.set(tokens.refreshToken);
+      CookieService.set(res, tokens.refreshToken);
 
       return res.status(200).json({
         message: "Аутентификация прошла успешно",
@@ -65,7 +65,7 @@ class AuthController {
         throw new ApiError().BadRequest("При регистрации произошла ошибка");
       }
 
-      CookieService.set(tokens.refreshToken);
+      CookieService.set(res, tokens.refreshToken);
 
       return res.status(200).json({
         message: "Регистрация прошла успешно",
@@ -78,7 +78,7 @@ class AuthController {
 
   async logout(_, res, next) {
     try {
-      CookieService.delete();
+      CookieService.delete(res);
 
       res.status(200).json({
         message: "Пользователь успешно вышел",
