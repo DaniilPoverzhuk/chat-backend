@@ -38,3 +38,39 @@ exports.save = async ({ refreshToken }, user_id) => {
     return null;
   }
 };
+
+exports.getRefreshTokenFromCookie = (req) => {
+  try {
+    return req.headers.cookie
+      .split(" ")
+      .find(
+        (item) => item.split("=")[0] === process.env.COOKIE_REFRESH_TOKEN_KEY
+      )
+      .split("=")[1];
+  } catch (error) {
+    return null;
+  }
+};
+
+exports.isValidAccessToken = (accessToken) => {
+  try {
+    const token = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET_KEY);
+
+    return token;
+  } catch (err) {
+    return null;
+  }
+};
+
+exports.isValidRefreshToken = (refreshToken) => {
+  try {
+    const token = jwt.verify(
+      refreshToken,
+      process.env.REFRESH_TOKEN_SECRET_KEY
+    );
+
+    return token;
+  } catch (err) {
+    return null;
+  }
+};

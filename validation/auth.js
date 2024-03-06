@@ -41,3 +41,13 @@ exports.registration = () => [
     .withMessage("Password length should be in the range of 3 - 20 characters"),
   body("avatar").optional(),
 ];
+
+exports.logout = () => [
+  body("email")
+    .exists()
+    .withMessage("Required field")
+    .isEmail()
+    .withMessage("this field should be email")
+    .isLength({ min: 3, max: 30 })
+    .withMessage("Email length should be in the range of 3 - 30 characters"),
+];
